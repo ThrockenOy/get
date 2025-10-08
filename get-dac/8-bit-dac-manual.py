@@ -28,7 +28,7 @@ try:
             bits = number_to_dac(number)
             for i in range(len(pins)):
                 GPIO.output(pins[i], bits[i])
-            print("Число на вход ЦАП", number, "биты", bits)
+            print("Число на вход ЦАП:", number, "Биты:", bits)
 
         except ValueError:
             print("Вы ввели не число. Попробуйте ещё раз\n")
