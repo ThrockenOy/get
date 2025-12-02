@@ -16,16 +16,15 @@ class R2R_DAC:
 
 
     def set_number(self, number):
-    number = int(number)  
-    if not (0 <= number <= 255):
-        print(f"Число {number} выходит за диапазон 0-255. Устанавливаем 0.")
-        number = 0
-
-    bits = [int(b) for b in bin(number)[2:].zfill(8)]
-    for i, pin in enumerate(self.gpio_bits):
-        GPIO.output(pin, bits[i])
-    if self.verbose:
-        print(f"Число: {number}, Биты: {bits}")
+        number = int(number)  
+        if not (0 <= number <= 255):
+            print(f"Число {number} выходит за диапазон 0-255. Устанавливаем 0.")
+            number = 0
+        bits = [int(b) for b in bin(number)[2:].zfill(8)]
+        for i, pin in enumerate(self.gpio_bits):
+            GPIO.output(pin, bits[i])
+        if self.verbose:
+            print(f"Число на вход ЦАП: {number}, Биты: {bits}")
 
 
 
