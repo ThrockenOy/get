@@ -18,9 +18,9 @@ class MCP4725:
                 print(f" Напряжение {voltage:.2f} В выходит за диапазон 0-{self.dynamic_range:.2f} В. Устанавливаем 0 В.")
             voltage = 0.0
 
-        value = int((voltage / vref) * 4095)
+        value = int((voltage / self.dynamic_range) * 4095)
 
-        command_byte = 0xC2
+        command_byte = 0x40
         high_byte = (value >> 4) & 0xFF
         low_byte = (value & 0x0F) <<4
 
@@ -37,7 +37,7 @@ class MCP4725:
 if __name__ == "__main__":
     vref = 3.3
     try:
-        dac = MCP4725(dynamic_range = 5.0, address = 0x61, verbose=True)
+        dac = MCP4725(dynamic_range = 5, address = 0x61, verbose=True)
         while True:
             voltage = float(input("Введите напряжение: "))
             dac.set_voltage(voltage, vref)

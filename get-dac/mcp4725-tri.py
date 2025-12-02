@@ -10,11 +10,9 @@ vref = 5.0
 try:
     dac = mcp.MCP4725(dynamic_range=vref, address=0x61, verbose=True)
 
-    t0 = time.time()
 
     while True:
-        t = time.time() - t0
-        norm_amp = sg.get_triangle_wave_amplitude(signal_frequency, t)
+        norm_amp = sg.get_triangle_wave_amplitude(signal_frequency, time.time())
         voltage = norm_amp * amplitude
         dac.set_voltage(voltage, vref)
         sg.wait_for_sampling_period(sampling_frequency)
