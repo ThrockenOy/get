@@ -7,7 +7,10 @@ signal_frequency = 10
 sampling_frequency = 1000
 
 try:
+
     dac = r2r.R2R_DAC([16, 20, 21, 25, 26, 17, 27, 22], dynamic_range=3.3, verbose=False)
+
+
     
     while True:
         norm_amp = sg.get_sin_wave_amplitude(signal_frequency, time.time())

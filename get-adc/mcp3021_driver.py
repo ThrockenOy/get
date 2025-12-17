@@ -23,8 +23,19 @@ class MCP3021:
     return number
 
     def get_voltage(self):
+        number = self.get_number()
+        # Преобразуем цифровое значение в напряжение
+        voltage = (number / 1023) * self.dynamic_range
+        return voltage
 
 
-
-try:
+if __name__ == "__main__":
+    try:
+        adc = MCP3021(dynamic_range=3.189, verbose=True)  \
+        while True:
+            voltage = adc.get_voltage()
+            print(f"Напряжение: {voltage:.3f} В")
+            time.sleep(1)
+    finally:
+        adc.deinit()
     
